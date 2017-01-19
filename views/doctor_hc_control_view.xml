@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="doctor_hc_control_form_view" model="ir.ui.view">
+      <field name="name">doctor.hc.control.form.view</field>
+      <field name="model">doctor.hc.control</field>
+      <field name="arch" type="xml">
+        <form string="Historia Clinica Control" version="7.0">
+          <group>
+            <field name="attentiont_id" invisible="1"/>
+            <field name="patient_id" invisible="1"/>
+            <field name="asunto"/>
+            <field name="evolucion"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="doctor_notas_auxiliar_tree_view" model="ir.ui.view">
+      <field name="name">doctor.hc.control.tree.view</field>
+      <field name="model">doctor.hc.control</field>
+      <field name="arch" type="xml">
+        <tree string="Historia Clinica Control">
+          <field name="attentiont_id" />
+          <field name="patient_id"/>
+          <field name="asunto"/>
+          <field name="evolucion"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_doctor_historia_control" model="ir.actions.act_window">
+      <field name="name">Historia Clinica Control</field>
+      <field name="res_model">doctor.hc.control</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+  </data>
+</openerp>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <!--doctor attention inherit-->
+    <record id="doctor_control_attention_inherit" model="ir.ui.view">
+      <field name="name">doctor_control_attention_inherit_form_view</field>
+      <field name="model">doctor.attentions</field>
+      <field name="inherit_id" ref="doctor.view_doctor_attentions_form"/>
+      <field name="arch" type="xml">
+		    <xpath expr="/form[@string='Attentions']/header/button[@string='Finish attention']" position="after">
+			   <button string="Historia Control" name="historia_control" type="object" class="oe_highlight"  context="{'patient_id' : patient_id}"/>
+		    </xpath>
+        
+        <xpath expr="/form[@string='Attentions']/group[@colspan='4']/notebook[@colspan='4']" position="inside">
+            <page string="Controles">
+              <legend class="texto_legend">Controles</legend>
+                  <field name="control_ids" nolabel="1">
+                    <tree string="Controles">
+                      <field name="attentiont_id"/>
+                      <field name="patient_id"/>
+                      <field name="asunto"/>
+                      <field name="evolucion"/>
+                    </tree>
+                  </field>
+            </page>
+        </xpath>
+
+        
+      </field>
+    </record>
+  </data>
+</openerp>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_octor_hc_control_physician,doctor.hc.control,model_doctor_hc_control,doctor.group_doctor_physician,1,1,1,0
+access_octor_hc_control_psicologo,doctor.hc.control,model_doctor_hc_control,doctor.group_doctor_psicologo,1,1,1,0
+access_octor_hc_control_odontologo,doctor.hc.control,model_doctor_hc_control,doctor.group_doctor_odontologo,1,1,1,0
