@@ -26,30 +26,38 @@ import time
 from datetime import date, datetime, timedelta
 
 
-class doctor_hc_control(osv.osv):
+class doctor_attention_resumen_inherit(osv.osv):
 
 
-	_name = 'doctor.hc.control'
+	_name = "doctor.attentions.resumen"
+	
+
+	_inherit = 'doctor.attentions.resumen'
 
 
-	_columns = {	
-		'attentiont_id': fields.many2one('doctor.attentions', u'Atención', ondelete='restrict'),
-		'patient_id': fields.many2one('doctor.patient', 'Paciente', ondelete='restrict'),
-		'date_attention': fields.datetime('Fecha control', required=True, readonly=True),
-		'asunto': fields.char('Asunto'),
-		'evolucion': fields.text(u'Evolución/control'),
-
+	_columns = {
+		'Controles_ids': fields.one2many('doctor.hc.control', 'attentiont_id', u'Controles', readonly=True),
 	}
 
-	def create(self, cr, uid, vals, context=None):
-		vals['patient_id'] = context.get('patient_id')
-		vals['attentiont_id'] = context.get('attentiont_id')
-		return super(doctor_hc_control,self).create(cr, uid, vals, context=context)
+	def default_get(self, cr, uid, fields, context=None):
+
+		res = super(doctor_attention_resumen_inherit,self).default_get(cr, uid, fields, context=context)
+
+		modelo_buscar = self.pool.get('doctor.hc.control')
+		paciente_id = context.get('patient_id')
+		Controles_ids = []
+		if paciente_id:
+			ids_ultimas_historias = modelo_buscar.search(cr, uid, [('patient_id', '=', paciente_id)], limit=3, context=context)
+
+			for datos in modelo_buscar.browse(cr, uid, ids_ultimas_historias, context=context):
+				
+				Controles_ids.append((0,0,{'attentiont_id' : datos.attentiont_id.id,
+											'patient_id': datos.patient_id.id,
+											'asunto': datos.asunto,
+											'evolucion': datos.evolucion,
+											'date_attention': datos.date_attention}))
+			res['Controles_ids'] = Controles_ids
+		return res
 
 
-	_defaults = {
-		'date_attention': lambda *a: datetime.strftime(datetime.now(), "%Y-%m-%d %H:%M:%S"),
-	}
-
-
-doctor_hc_control()
+doctor_attention_resumen_inherit()

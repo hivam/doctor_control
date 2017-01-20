@@ -9,6 +9,7 @@
         <form string="Historia Clinica Control" version="7.0">
           <group>
             <field name="attentiont_id" invisible="1"/>
+            <field name="date_attention" invisible="1"/>
             <field name="patient_id" invisible="1"/>
             <field name="asunto"/>
             <field name="evolucion"/>
@@ -22,6 +23,7 @@
       <field name="model">doctor.hc.control</field>
       <field name="arch" type="xml">
         <tree string="Historia Clinica Control">
+          <field name="date_attention"/>
           <field name="attentiont_id" />
           <field name="patient_id"/>
           <field name="asunto"/>

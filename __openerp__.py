@@ -32,6 +32,7 @@
     'data'        : [
                     'views/doctor_hc_control_view.xml',
                     'views/doctor_attention_inherit_view.xml',
+                    'views/doctor_attention_resumen_inherit_view.xml',
                     'security/ir.model.access.csv',
     ],      
     'installable' : True,

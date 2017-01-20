@@ -17,6 +17,7 @@
               <legend class="texto_legend">Controles</legend>
                   <field name="control_ids" nolabel="1">
                     <tree string="Controles">
+                      <field name="date_attention"/>
                       <field name="attentiont_id"/>
                       <field name="patient_id"/>
                       <field name="asunto"/>

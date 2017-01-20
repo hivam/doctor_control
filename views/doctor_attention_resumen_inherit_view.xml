@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <!--doctor attention inherit-->
+    <record id="doctor_resumen_inherit" model="ir.ui.view">
+      <field name="name">doctor_resumen_inherit_form_view</field>
+      <field name="model">doctor.attentions.resumen</field>
+      <field name="inherit_id" ref="l10n_co_doctor.view_doctor_attentions_resumen_form"/>
+      <field name="arch" type="xml">
+
+        
+        <xpath expr="/form[@string='Resumen historia clinica']/group//group[4]" position="after">
+          <legend class="texto_legend">Controles</legend>
+            <group colspan="6" col="4">
+              <field name="Controles_ids" nolabel="1">
+                <tree string="Controles">
+                  <field name="date_attention"/>
+                  <field name="attentiont_id"/>
+                  <field name="patient_id"/>
+                  <field name="asunto"/>
+                  <field name="evolucion"/>
+                </tree>
+              </field>
+            </group>
+        </xpath>
+
+        
+      </field>
+    </record>
+  </data>
+</openerp>
