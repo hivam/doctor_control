@@ -38,7 +38,7 @@ class doctor_attention_resumen_inherit(osv.osv):
 
 
 	_columns = {
-		'Controles_ids': fields.one2many('doctor.hc.control', 'attentiont_id', u'Controles', readonly=True),
+		'controles_ids': fields.one2many('doctor.hc.control', 'attentiont_id', u'Controles', readonly=True),
 	}
 
 	def default_get(self, cr, uid, fields, context=None):
@@ -58,7 +58,7 @@ class doctor_attention_resumen_inherit(osv.osv):
 											'asunto': datos.asunto,
 											'evolucion': datos.evolucion,
 											'date_attention': datos.date_attention}))
-			res['Controles_ids'] = Controles_ids
+			res['controles_ids'] = Controles_ids
 		return res
 
 
@@ -75,12 +75,12 @@ class doctor_attention_resumen_inherit(osv.osv):
 			modelo_buscar = self.pool.get('doctor.hc.control')
 			record = modelo_buscar.search(cr, uid, [('patient_id', '=', patient_id)], limit=3, context=context)
 
-		for node in doc.xpath("//field[@name='Controles_ids']"):
+		for node in doc.xpath("//field[@name='controles_ids']"):
 				
 			if not record:
 
 				node.set('invisible', repr(True))
-				setup_modifiers(node, res['fields']['Controles_ids'])
+				setup_modifiers(node, res['fields']['controles_ids'])
 
 				for node in doc.xpath("//legend[@id='Controles']"):
 					node.set('invisible', repr(True))

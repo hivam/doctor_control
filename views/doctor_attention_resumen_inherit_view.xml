@@ -13,7 +13,7 @@
         <xpath expr="/form[@string='Resumen historia clinica']/group//group[4]" position="after">
           <legend class="texto_legend" id="Controles">Controles</legend>
             <group colspan="6" col="4">
-              <field name="Controles_ids" nolabel="1">
+              <field name="controles_ids" nolabel="1">
                 <tree string="Controles">
                   <field name="date_attention"/>
                   <field name="attentiont_id"/>
