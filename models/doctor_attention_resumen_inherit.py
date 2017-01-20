@@ -24,6 +24,8 @@ from openerp.osv import fields, osv
 from openerp.tools.translate import _
 import time
 from datetime import date, datetime, timedelta
+from openerp.osv.orm import setup_modifiers
+from lxml import etree
 
 
 class doctor_attention_resumen_inherit(osv.osv):
@@ -57,6 +59,36 @@ class doctor_attention_resumen_inherit(osv.osv):
 											'evolucion': datos.evolucion,
 											'date_attention': datos.date_attention}))
 			res['Controles_ids'] = Controles_ids
+		return res
+
+
+
+	def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+		
+		res = super(doctor_attention_resumen_inherit, self).fields_view_get(cr, uid, view_id=view_id, view_type=view_type, context=context, toolbar=toolbar, submenu=submenu)
+		doc = etree.XML(res['arch'])
+		patient_id = context.get('patient_id')
+
+
+		record = None
+		if patient_id:
+			modelo_buscar = self.pool.get('doctor.hc.control')
+			record = modelo_buscar.search(cr, uid, [('patient_id', '=', patient_id)], limit=3, context=context)
+
+		for node in doc.xpath("//field[@name='Controles_ids']"):
+				
+			if not record:
+
+				node.set('invisible', repr(True))
+				setup_modifiers(node, res['fields']['Controles_ids'])
+
+				for node in doc.xpath("//legend[@id='Controles']"):
+					node.set('invisible', repr(True))
+					setup_modifiers(node)
+
+
+		res['arch'] = etree.tostring(doc)
+		
 		return res
 
 
