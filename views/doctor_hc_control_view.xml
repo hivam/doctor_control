@@ -8,8 +8,9 @@
       <field name="arch" type="xml">
         <form string="Historia Clinica Control" version="7.0">
           <footer> 
-            <button name="write" type="object" string="Guardar" class="oe_highlight" special="Save"/>
-             <button name="cancel" string="Cancelar" special="cancel" class="oe_link"/> 
+            <button name="create" type="object" string="Guardar" class="oe_highlight" special="Save"/>
+            o
+            <button name="cancel" string="Cancelar" special="cancel" class="oe_link"/> 
            </footer>
           <group>
             <field name="attentiont_id" invisible="1"/>
