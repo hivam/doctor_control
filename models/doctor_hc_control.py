@@ -42,8 +42,31 @@ class doctor_hc_control(osv.osv):
 	}
 
 	def create(self, cr, uid, vals, context=None):
-		vals['patient_id'] = context.get('patient_id')
-		vals['attentiont_id'] = context.get('attentiont_id')
+
+		
+		patient_id = context.get('patient_id')
+		vals['patient_id'] = patient_id
+		atencion = 0
+
+		if 'attentiont_id' in vals:
+			vals['attentiont_id'] = context.get('attentiont_id')
+		else:
+			origen = vals['origin']
+			cita_id = self.pool.get('doctor.appointment').search(cr, uid, [('number', '=', origen)], context=context)
+			cita = self.pool.get('doctor.appointment').browse(cr, uid, cita_id[0], context=context).type_id.name
+
+			if cita.lower().find('psicologia') != -1 or cita.lower().find(u'psicología') != -1:
+				atencion = self.pool.get('doctor.psicologia').search(cr, uid, [('patient_id', '=', patient_id)], context=context, limit=1)
+
+			if cita.lower().find('medicina') != -1 or cita.lower().find(u'médicina') != -1:
+				atencion = self.pool.get('doctor.attentions').search(cr, uid, [('patient_id', '=', patient_id)], context=context, limit=1)
+
+			if cita.lower().find('Riesgo Biologico') != -1:
+				atencion = self.pool.get('doctor.atencion.ries.bio').search(cr, uid, [('patient_id', '=', patient_id)], context=context, limit=1)
+
+			if atencion[0]:
+				vals['attentiont_id']= atencion[0]
+
 		return super(doctor_hc_control,self).create(cr, uid, vals, context=context)
 
 
