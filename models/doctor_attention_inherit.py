@@ -57,7 +57,6 @@ class doctor_attention_inherit(osv.osv):
 			'view_id': [view_id] or False,
 			'nodestroy': False,
 			'target': 'new',
-			'flags': {'form': {'action_buttons': True}} 
 		}
 
 
