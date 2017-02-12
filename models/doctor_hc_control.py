@@ -52,9 +52,7 @@ class doctor_hc_control(osv.osv):
 			vals['attentiont_id'] = context.get('attentiont_id')
 		
 		else:
-			origen = vals['origin']
-			cita_id = self.pool.get('doctor.appointment').search(cr, uid, [('number', '=', origen)], context=context)
-			cita = self.pool.get('doctor.appointment').browse(cr, uid, cita_id[0], context=context).type_id.name
+			cita = context.get('tipo_cita_id')
 
 			if cita.lower().find('psicologia') != -1 or cita.lower().find(u'psicología') != -1:
 				atencion = self.pool.get('doctor.psicologia').search(cr, uid, [('patient_id', '=', patient_id)], context=context, limit=1)
