@@ -68,7 +68,7 @@ class doctor_appointment(osv.osv):
 
 		modelo = self.pool.get('doctor.doctor').tipo_historia(tipo_historia)
 
-		self.pool.get('doctor.doctor').obtener_ultimas_atenciones_paciente(cr, uid, modelo, 2, doctor_appointment_variable.patient_id.id, doctor_appointment_variable.date_attention, context=context)
+		self.pool.get('doctor.doctor').obtener_ultimas_atenciones_paciente(cr, uid, modelo, 2, doctor_appointment_variable.patient_id.id, doctor_appointment_variable.time_begin, context=context)
 
 
 		appointment_state = doctor_appointment_variable.state
